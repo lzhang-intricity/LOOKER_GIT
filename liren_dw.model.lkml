@@ -10,7 +10,8 @@ datagroup: liren_dw_default_datagroup {
 
 persist_with: liren_dw_default_datagroup
 
-explore: fact_events {
+explore: fact_events{
+  label: "funnel analysis"
   join: dim_customers { type: inner
            sql_on: (${fact_events.customer_sk} = ${dim_customers.sk};;
            relationship: many_to_one
@@ -27,7 +28,6 @@ explore: fact_events {
 
 # - explore: dim_customer_tmp
 
-explore: dim_customers{}
 
 # - explore: dim_customers_bk
 
@@ -37,7 +37,6 @@ explore: dim_customers{}
 
 # - explore: dim_devices
 
-explore: dim_events{}
 
 # - explore: dim_orders
 
