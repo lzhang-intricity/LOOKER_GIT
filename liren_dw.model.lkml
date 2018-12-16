@@ -10,7 +10,16 @@ datagroup: liren_dw_default_datagroup {
 
 persist_with: liren_dw_default_datagroup
 
-explore: fact_events {}
+explore: fact_events {
+  join: dim_customers { type: inner
+           sql_on: (${fact_events.customer_sk} = ${dim_customers.sk};;
+           relationship: many_to_one
+  }
+  join: dim_events {type:inner
+    sql_on: ${fact_events.event_sk}=${dim_events.sk};;
+    relationship: many_to_one
+    }
+}
 
 # - explore: debug_log
 
@@ -18,7 +27,7 @@ explore: fact_events {}
 
 # - explore: dim_customer_tmp
 
-# - explore: dim_customers
+explore: dim_customers{}
 
 # - explore: dim_customers_bk
 
@@ -28,7 +37,7 @@ explore: fact_events {}
 
 # - explore: dim_devices
 
-# - explore: dim_events
+explore: dim_events{}
 
 # - explore: dim_orders
 
