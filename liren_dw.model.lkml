@@ -11,6 +11,7 @@ datagroup: liren_dw_default_datagroup {
 persist_with: liren_dw_default_datagroup
 
 explore: fact_events{
+  group_label: "Fair Data Warehouse"
   label: "funnel analysis"
   join: dim_customers { type: inner
            sql_on: (${fact_events.customer_sk} = ${dim_customers.sk};;
