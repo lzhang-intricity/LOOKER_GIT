@@ -21,6 +21,31 @@ explore: fact_events{
     sql_on: ${fact_events.event_sk}=${dim_events.sk};;
     relationship: many_to_one
     }
+
+
+}
+
+explore: fact_events_app{
+  group_label: "Fair Data Warehouse"
+  label: "customer application"
+  from: fact_events
+  join: dim_customers { type: inner
+    sql_on: (${fact_events_app.customer_sk} = ${dim_customers.sk};;
+    relationship: many_to_one
+  }
+  join: dim_events {type:inner
+    sql_on: ${fact_events_app.event_sk}=${dim_events.sk};;
+    relationship: many_to_one
+  }
+  join: dim_applications {type:inner
+    sql_on: ${fact_events_app.application_sk}=${dim_applications.sk};;
+    relationship: many_to_one
+  }
+  always_filter: {
+    filters: {field:dim_events.event_name
+      value:"application created"}
+
+  }
 }
 
 # - explore: debug_log
